@@ -15,6 +15,7 @@
 		6EC42C4B275602C100FE3BBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EC42C4A275602C100FE3BBF /* Assets.xcassets */; };
 		6EC42C4E275602C100FE3BBF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EC42C4C275602C100FE3BBF /* LaunchScreen.storyboard */; };
 		6EC42C51275602C100FE3BBF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC42C50275602C100FE3BBF /* main.m */; };
+		6EC42C59275606DD00FE3BBF /* WaterFallFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC42C58275606DD00FE3BBF /* WaterFallFlowLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,8 @@
 		6EC42C4D275602C100FE3BBF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6EC42C4F275602C100FE3BBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6EC42C50275602C100FE3BBF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6EC42C57275606DD00FE3BBF /* WaterFallFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaterFallFlowLayout.h; sourceTree = "<group>"; };
+		6EC42C58275606DD00FE3BBF /* WaterFallFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WaterFallFlowLayout.m; sourceTree = "<group>"; };
 		CCB4CFD0DA8AE10B6D22B1E0 /* Pods-CustomWaterFallFlow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CustomWaterFallFlow.release.xcconfig"; path = "Target Support Files/Pods-CustomWaterFallFlow/Pods-CustomWaterFallFlow.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -53,7 +56,6 @@
 				434A1E665F11C146BC3FE185 /* Pods-CustomWaterFallFlow.debug.xcconfig */,
 				CCB4CFD0DA8AE10B6D22B1E0 /* Pods-CustomWaterFallFlow.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -89,6 +91,8 @@
 				6EC42C4C275602C100FE3BBF /* LaunchScreen.storyboard */,
 				6EC42C4F275602C100FE3BBF /* Info.plist */,
 				6EC42C50275602C100FE3BBF /* main.m */,
+				6EC42C57275606DD00FE3BBF /* WaterFallFlowLayout.h */,
+				6EC42C58275606DD00FE3BBF /* WaterFallFlowLayout.m */,
 			);
 			path = CustomWaterFallFlow;
 			sourceTree = "<group>";
@@ -216,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EC42C46275602BF00FE3BBF /* ViewController.m in Sources */,
+				6EC42C59275606DD00FE3BBF /* WaterFallFlowLayout.m in Sources */,
 				6EC42C40275602BF00FE3BBF /* AppDelegate.m in Sources */,
 				6EC42C51275602C100FE3BBF /* main.m in Sources */,
 				6EC42C43275602BF00FE3BBF /* SceneDelegate.m in Sources */,
