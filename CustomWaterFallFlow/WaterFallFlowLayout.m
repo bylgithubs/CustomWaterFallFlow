@@ -33,17 +33,29 @@
         NSString * col = [NSString stringWithFormat:@"%ld",(long)i];
         self.colunMaxYDic[col] = @0;
     }
+    
     NSMutableArray * attrsArray = [NSMutableArray array];
+    
     NSInteger section = [self.collectionView numberOfSections];
     for (NSInteger i = 0 ; i < section; i++) {
+        
+        //获取header的UICollectionViewLayoutAttributes
+        UICollectionViewLayoutAttributes *headerAttrs = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader atIndexPath:[NSIndexPath indexPathForItem:0 inSection:i]];
+        [attrsArray addObject:headerAttrs];
+        
         //获取item的UICollectionViewLayoutAttributes
         NSInteger count = [self.collectionView numberOfItemsInSection:i];
         for (NSInteger j = 0; j < count; j++) {
             UICollectionViewLayoutAttributes * attrs = [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:j inSection:i]];
             [attrsArray addObject:attrs];
         }
+        
+        //获取footer的UICollectionViewLayoutAttributes
+        UICollectionViewLayoutAttributes *footerAttrs = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionFooter atIndexPath:[NSIndexPath indexPathForItem:0 inSection:i]];
+        [attrsArray addObject:footerAttrs];
     }
-    return attrsArray;
+    
+    return  attrsArray;
 }
 
 - (CGSize)collectionViewContentSize
@@ -103,5 +115,59 @@
     return _colunMaxYDic;
 }
 
+
+- (nullable UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath{
+    
+    __block NSString * maxCol = @"0";
+    //遍历找出最高的列
+    [self.colunMaxYDic enumerateKeysAndObjectsUsingBlock:^(NSString * column, NSNumber *maxY, BOOL *stop) {
+        if ([maxY floatValue] > [self.colunMaxYDic[maxCol] floatValue]) {
+            maxCol = column;
+        }
+    }];
+    
+    //header
+    if ([UICollectionElementKindSectionHeader isEqualToString:elementKind]) {
+        UICollectionViewLayoutAttributes *attri = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader withIndexPath:indexPath];
+        //size
+        CGSize size = CGSizeZero;
+        if ([self.delegate respondsToSelector:@selector(collectionView:layout:referenceSizeForHeaderInSection:)]) {
+            size = [self.delegate collectionView:self.collectionView layout:self referenceSizeForHeaderInSection:indexPath.section];
+        }
+        size = CGSizeMake(100, 30);
+        CGFloat x = self.sectionInset.left;
+        CGFloat y = [[self.colunMaxYDic objectForKey:maxCol] floatValue] + self.sectionInset.top;
+        
+        //    跟新所有对应列的高度
+        for(NSString *key in self.colunMaxYDic.allKeys)
+        {
+            self.colunMaxYDic[key] = @(y + size.height);
+        }
+        
+        attri.frame = CGRectMake(x , y, size.width, size.height);
+        return attri;
+    }
+    
+    //footer
+    else{
+        UICollectionViewLayoutAttributes *attri = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionFooter withIndexPath:indexPath];
+        //size
+        CGSize size = CGSizeZero;
+        if ([self.delegate respondsToSelector:@selector(collectionView:layout:referenceSizeForFooterInSection:)]) {
+            size = [self.delegate collectionView:self.collectionView layout:self referenceSizeForFooterInSection:indexPath.section];
+        }
+        CGFloat x = self.sectionInset.left;
+        CGFloat y = [[self.colunMaxYDic objectForKey:maxCol] floatValue];
+        
+        //    跟新所有对应列的高度
+        for(NSString *key in self.colunMaxYDic.allKeys)
+        {
+            self.colunMaxYDic[key] = @(y + size.height + self.sectionInset.bottom);
+        }
+        
+        attri.frame = CGRectMake(x , y, size.width, size.height);
+        return attri;
+    }
+}
 
 @end
