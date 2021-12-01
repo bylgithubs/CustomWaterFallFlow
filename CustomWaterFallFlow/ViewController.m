@@ -32,6 +32,11 @@
 }
 
 #pragma mark CustomWaterFallFlowLayoutDelegate
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(WaterFallFlowLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+    return CGSizeMake(100, 50);
+}
+
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(WaterFallFlowLayout*)collectionViewLayout heightForWidth:(CGFloat)width atIndexPath:(NSIndexPath*)indexPath
 {
     if (indexPath.row%2 == 0) {
@@ -43,14 +48,18 @@
     //return cellHeight;
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(WaterFallFlowLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
+    return CGSizeMake(200, 30);
+}
+
 #pragma mark - UICollectionView Delegate
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 100;
+    return 6;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {

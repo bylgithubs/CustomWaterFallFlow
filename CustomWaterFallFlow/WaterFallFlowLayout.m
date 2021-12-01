@@ -134,11 +134,10 @@
         if ([self.delegate respondsToSelector:@selector(collectionView:layout:referenceSizeForHeaderInSection:)]) {
             size = [self.delegate collectionView:self.collectionView layout:self referenceSizeForHeaderInSection:indexPath.section];
         }
-        size = CGSizeMake(100, 30);
         CGFloat x = self.sectionInset.left;
         CGFloat y = [[self.colunMaxYDic objectForKey:maxCol] floatValue] + self.sectionInset.top;
         
-        //    跟新所有对应列的高度
+        //    更新所有对应列的高度
         for(NSString *key in self.colunMaxYDic.allKeys)
         {
             self.colunMaxYDic[key] = @(y + size.height);
@@ -146,10 +145,7 @@
         
         attri.frame = CGRectMake(x , y, size.width, size.height);
         return attri;
-    }
-    
-    //footer
-    else{
+    } else{ //footer
         UICollectionViewLayoutAttributes *attri = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionFooter withIndexPath:indexPath];
         //size
         CGSize size = CGSizeZero;
